@@ -1,0 +1,110 @@
+public void PiedraPapelTijeras()
+{
+    Console.WriteLine("Juego del piedra papel y tijeras");
+    Console.WriteLine("--------------------------------");
+    Console.WriteLine("En este juego gana quien saque un elemento superior al del rival");
+    Console.WriteLine("Papel gana a piedra, pero pierde contra tijeras");
+    Console.WriteLine("Piedra gana a tijeras, pero pierde contra papel");
+    Console.WriteLine("Tijera gana a papel, pero pierde contra piedra");
+    Console.WriteLine();
+    string elemento1 = "";
+    string piedra = "piedra";
+    string papel = "papel";
+    string tijeras = "tijeras";
+    string elemento2String = "";
+    int vidasJugador = 3;
+    int vidasMaquina = 3;
+    Random random = new Random();
+
+    do
+    {
+        do
+        {
+            try
+            {
+                Console.Write("Introduce el primer elemento a jugar (Piedra/Papel/Tijeras): ");
+                elemento1 = Console.ReadLine();
+            }
+            catch (Exception e) { Console.WriteLine(e.Message); }
+            elemento1 = elemento1.ToLower();
+        } while (elemento1 != "piedra" && elemento1 != "papel" && elemento1 != "tijeras");
+
+        int elemento2 = random.Next(1, 4);
+        if (elemento2 == 1)
+        {
+            elemento2String = piedra;
+        }
+        else if (elemento2 == 2)
+        {
+            elemento2String = papel;
+        }
+        else if (elemento2 == 3)
+        {
+            elemento2String = tijeras;
+        }
+        Console.WriteLine($"La máquina ha elegido {elemento2String} contra el jugador que ha elegido {elemento1}");
+
+        if (elemento1 == "papel")
+        {
+            if (elemento2String == papel)
+            {
+                Console.WriteLine("Empate, sigan jugando");
+            }
+            if (elemento2String == piedra)
+            {
+                Console.WriteLine("El jugador gana, una vida menos para la máquina");
+                vidasMaquina--;
+            }
+            if (elemento2String == tijeras)
+            {
+                Console.WriteLine("La máquina gana, una vida menos para el jugador.");
+                vidasJugador--;
+            }
+        }
+        if (elemento1 == "piedra")
+        {
+            if (elemento2String == piedra)
+            {
+                Console.WriteLine("Empate, sigan jugando");
+            }
+            if (elemento2String == tijeras)
+            {
+                Console.WriteLine("El jugador gana, una vida menos para la maquina.");
+                vidasMaquina--;
+            }
+            if (elemento2String == papel)
+            {
+                Console.WriteLine("La máquina gana.");
+                vidasJugador--;
+            }
+        }
+        if (elemento1 == "tijeras")
+        {
+            if (elemento2String == tijeras)
+            {
+                Console.WriteLine("Empate, sigan jugando");
+            }
+            if (elemento2String == papel)
+            {
+                Console.WriteLine("");
+                vidasMaquina--;
+            }
+            if (elemento2String == piedra)
+            {
+                Console.WriteLine("La máquina gana.");
+                vidasJugador--;
+            }
+        }
+
+        Console.WriteLine($"Al jugador le quedan {vidasJugador} vidas, y a la máquina le quedan {vidasMaquina} vidas");
+        Console.WriteLine();
+        if (vidasJugador == 0)
+        {
+            Console.WriteLine("Te has quedado sin vidas, la maquina gana la partida.");
+        }
+        else if (vidasMaquina == 0)
+        {
+            Console.WriteLine("La máquina se ha quedado sin vidas, ganas la partida.");
+        }
+    } while (vidasMaquina != 0 && vidasJugador != 0);
+}
