@@ -7,29 +7,34 @@ public void PiedraPapelTijeras()
     Console.WriteLine("Piedra gana a tijeras, pero pierde contra papel");
     Console.WriteLine("Tijera gana a papel, pero pierde contra piedra");
     Console.WriteLine();
+
     string elemento1 = "";
-    string piedra = "piedra";
-    string papel = "papel";
-    string tijeras = "tijeras";
+    const string piedra = "piedra";
+    const string papel = "papel";
+    const string tijeras = "tijeras";
     string elemento2String = "";
     int vidasJugador = 3;
     int vidasMaquina = 3;
-    Random random = new Random();
 
-    do
+    Random random = new Random(); //LLamamos al objeto random para utiliarlo mas adelante generandonos un número aleatorio.
+
+    do //Bucle que repetirá todo el codigo de instrucciones del PiedraPapelTijeras.
     {
-        do
+        
+        do //Bucle que pregunta al usuario por un valor para jugar al PiedraPapelTijeras y comprueba que sea un valor válido para el juego.
         {
             try
             {
                 Console.Write("Introduce el primer elemento a jugar (Piedra/Papel/Tijeras): ");
                 elemento1 = Console.ReadLine();
+                elemento1 = elemento1.ToLower();//Transformamos el valor introducido por el usuario en minusculas para igualar todas las variables.
             }
-            catch (Exception e) { Console.WriteLine(e.Message); }
-            elemento1 = elemento1.ToLower();
-        } while (elemento1 != "piedra" && elemento1 != "papel" && elemento1 != "tijeras");
+            catch (Exception e) { Console.WriteLine($"e.Message"); }
+        } while (elemento1 != "piedra" && elemento1 != "papel" && elemento1 != "tijeras"); //La condicion del bucle solo dejará de ejecutar el bucle si el valor es piedra/papel/tijeras.
 
-        int elemento2 = random.Next(1, 4);
+        int elemento2 = random.Next(1, 4); //Variable que almacena un número aleatorio entre 1 y 3.
+
+        //Si el valor del número aleatorio anterior es 1 se almacenará el valor de "PIEDRA", si es 2 será "PAPEL", y si es 3 será "TIJERAS".
         if (elemento2 == 1)
         {
             elemento2String = piedra;
@@ -44,21 +49,22 @@ public void PiedraPapelTijeras()
         }
         Console.WriteLine($"La máquina ha elegido {elemento2String} contra el jugador que ha elegido {elemento1}");
 
-        if (elemento1 == "papel")
+        //Comparaciones de las dos variables del juego.
+        if (elemento1 == "papel") //Si el elemento1 vale papel entrará en las llaves siguientes y seguirá con las comparaciones.
         {
-            if (elemento2String == papel)
+            if (elemento2String == papel)//Si el valor generado por la máquina es papel entonces seria un empate PAPELvsPAPEL.
             {
                 Console.WriteLine("Empate, sigan jugando");
             }
-            if (elemento2String == piedra)
+            if (elemento2String == piedra)//Si el valor generado por la máquina es piedra entonces seria ronda ganada para el jugador.
             {
                 Console.WriteLine("El jugador gana, una vida menos para la máquina");
-                vidasMaquina--;
+                vidasMaquina--; //resta una vida a la máquina hasta llegar a 0, entonces finalizará el programa dando la victoria al jugador.
             }
-            if (elemento2String == tijeras)
+            if (elemento2String == tijeras)//Si el valor generado por la máquina es tijeras entonces seria ronda ganada para la máquina.
             {
                 Console.WriteLine("La máquina gana, una vida menos para el jugador.");
-                vidasJugador--;
+                vidasJugador--; //resta una vida al jugador hasta llegar a 0, entonces finalizará el programa dando la victoria a la máquina.
             }
         }
         if (elemento1 == "piedra")
@@ -98,13 +104,38 @@ public void PiedraPapelTijeras()
 
         Console.WriteLine($"Al jugador le quedan {vidasJugador} vidas, y a la máquina le quedan {vidasMaquina} vidas");
         Console.WriteLine();
+
         if (vidasJugador == 0)
         {
             Console.WriteLine("Te has quedado sin vidas, la maquina gana la partida.");
+            Console.WriteLine();
+            repetirPartida();
         }
-        else if (vidasMaquina == 0)
+        if (vidasMaquina == 0)
         {
             Console.WriteLine("La máquina se ha quedado sin vidas, ganas la partida.");
+            Console.WriteLine();
+            repetirPartida();
         }
     } while (vidasMaquina != 0 && vidasJugador != 0);
+
+    void repetirPartida()
+    {
+        string respuesta = ""; //Variable de uso local de la funcion para almacenar la respuesta del usuario.
+        do//Bucle para preguntar al usuario una respuesta hasta que entre en nuestros valores válidos (S/N).
+        {
+            try//Comprobamos que sean valores válidos (char = S/N).
+            {
+                Console.Write("¿Quieres volver a jugar? (S/N): ");
+                respuesta = Console.ReadLine();
+                respuesta = respuesta.ToLower();//Convertimos la respuesta a minúscula para igualar las condiciones.
+            }catch(Exception e) { Console.WriteLine($"{e.Message}");}
+        }while (respuesta != "s" && respuesta != "n") ;
+        
+        if (respuesta == "s") //Si el usuario introduce la 's' entonces volveremos a inciar el programa.
+        {
+            PiedraPapelTijeras();
+        }
+        else { Console.WriteLine("Entonces el juego ha finalizado"); }
+    }
 }
