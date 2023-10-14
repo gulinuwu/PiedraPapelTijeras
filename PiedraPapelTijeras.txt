@@ -82,7 +82,7 @@ public void PiedraPapelTijeras()
         string respuesta = ""; //Variable de uso local de la funcion para almacenar la respuesta del usuario.
         do //Bucle para preguntar al usuario una respuesta hasta que entre en nuestros valores válidos (S/N).
         {
-            try //Comprobamos que sean valores válidos (char = S/N).
+            try //Comprobamos que sean valores válidos (S/N).
             {
                 Console.Write("¿Quieres volver a jugar? (S/N): ");
                 respuesta = Console.ReadLine();
