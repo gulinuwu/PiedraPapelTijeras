@@ -16,7 +16,7 @@ public void PiedraPapelTijeras()
     int vidasJugador = 3;
     int vidasMaquina = 3;
 
-    Random random = new Random(); //Llamamos al objeto random para utiliarlo más adelante generándonos un número aleatorio.
+    Random random = new Random(); //Llamamos al objeto random para utilizarlo más adelante generándonos un número aleatorio.
 
     do //Bucle que repetirá todo el codigo de instrucciones del PiedraPapelTijeras.
     {
