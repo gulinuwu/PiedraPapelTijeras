@@ -28,7 +28,7 @@ public void PiedraPapelTijeras()
                 elemento1 = Console.ReadLine();
                 elemento1 = elemento1.ToLower(); //Transformamos el valor introducido por el usuario en minusculas para igualar todas las variables.
 
-                if(elemento1 != piedra && elemento1 != papel && elemento1 != tijeras)
+                if (elemento1 != piedra && elemento1 != papel && elemento1 != tijeras)
                 {
                     Console.Write("El valor introducido no es válido, tienes que introducir -> (Piedra / Papel / Tijeras): ");
                 }
@@ -48,20 +48,28 @@ public void PiedraPapelTijeras()
             Console.WriteLine("El jugador gana, una vida menos para la máquina");
             Console.WriteLine();
             vidasMaquina--;
+            Console.WriteLine($"Al jugador le quedan {vidasJugador} vidas, y a la máquina le quedan {vidasMaquina} vidas");
+            Thread.Sleep(2500);
         }
         else if (elemento1 == elemento2String)
         {
             Console.WriteLine("Empate, sigan jugando");
+            Console.WriteLine($"Al jugador le quedan {vidasJugador} vidas, y a la máquina le quedan {vidasMaquina} vidas");
+            Thread.Sleep(2500);
         }
         else
         {
             Console.WriteLine("La máquina gana, una vida menos para el jugador.");
             Console.WriteLine();
             vidasJugador--;
+            Console.WriteLine($"Al jugador le quedan {vidasJugador} vidas, y a la máquina le quedan {vidasMaquina} vidas");
+            Thread.Sleep(2500);
+            
         }
-        Console.WriteLine($"Al jugador le quedan {vidasJugador} vidas, y a la máquina le quedan {vidasMaquina} vidas");
         Console.WriteLine();
-        
+        Console.Clear();
+        Console.WriteLine($"Al jugador le quedan {vidasJugador} vidas, y a la máquina le quedan {vidasMaquina} vidas");
+
     } while (vidasMaquina != 0 && vidasJugador != 0);
 
     if (vidasJugador == 0)
@@ -87,9 +95,10 @@ public void PiedraPapelTijeras()
                 Console.Write("¿Quieres volver a jugar? (S/N): ");
                 respuesta = Console.ReadLine();
                 respuesta = respuesta.ToLower(); //Convertimos la respuesta a minúscula para igualar las condiciones.
-            }catch(Exception e) { Console.WriteLine($"{e.Message}");}
-        }while (respuesta != "s" && respuesta != "n") ;
-        
+            }
+            catch (Exception e) { Console.WriteLine($"{e.Message}"); }
+        } while (respuesta != "s" && respuesta != "n");
+
         if (respuesta == "s") //Si el usuario introduce la 's' entonces volveremos a inciar el programa.
         {
             PiedraPapelTijeras();
